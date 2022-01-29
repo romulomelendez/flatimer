@@ -1,0 +1,12 @@
+
+div {
+
+    display: flex;
+    flex-direction: row;
+}
+
+h2 {
+
+    color: aqua;
+
+}
