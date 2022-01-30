@@ -1,10 +1,11 @@
 //import Fla from '../../../public/assets/fla-logo.png'
+import React from 'react'
 
 import './style.css'
 
 const moment = require('moment')
 
-const Timer = () => {
+export const Timer = () => {
     
     const date = moment('22/03/1997', 'DD/MM/YYYY').fromNow()
 
@@ -20,5 +21,3 @@ const Timer = () => {
     )
 
 }
-
-export default Timer
