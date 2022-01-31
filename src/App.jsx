@@ -1,6 +1,6 @@
 import { Home } from './page/Home'
 
-import './global-style.css'
+import './global.css'
 
 export const App = () => (
       
