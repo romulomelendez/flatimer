@@ -9,7 +9,9 @@ const moment = require('moment')
 
 export const Timer = () => {
     
-    const date = moment('22/03/1997', 'DD/MM/YYYY').fromNow()
+    const lastTitleDate = '22/03/1997'
+    //const lastDate = axios.get('')
+    const totalDate = moment(`${lastTitleDate}`, 'DD/MM/YYYY').fromNow()
 
     return (
 
@@ -24,7 +26,7 @@ export const Timer = () => {
             </section>
             <section className="date-container">
 
-                <h2>{ date }</h2>
+                <h2>{ totalDate }</h2>
 
             </section>
 
