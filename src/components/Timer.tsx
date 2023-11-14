@@ -1,21 +1,71 @@
-import Image from "next/image"
+"use client"
 
-import flamengoLogo from "../../public/assets/flamengo-logo.png"
+import { useState, useEffect } from "react"
 
-export const Timer: React.FC = () => {
+type LastTitleProps = {
+  lastTitle: {
+    dateOfLastTitle: string,
+    timeOfLastTitle: {
+      hour: string | number,
+      minutes: string | number,
+      seconds: string | number 
+    }
+  }
+}
 
-    return (
-      <section className="flex flex-col gap-1 justify-center items-center p-2">
-        <div className="flex flex-col lg:flex-row gap-5 w-full justify-start">
-          <h1 className="text-white font-semibold text-6xl">365 dias</h1>
-          <h1 className="text-white font-semibold text-6xl">11 horas</h1>
-          <h1 className="text-white font-semibold text-6xl">24 minutos</h1>
-          <h1 className="text-white font-semibold text-6xl">3 segundos</h1>
-        </div>
+type TestDateProps = {
+  years: string | number,
+  mounths: string | number,
+  days: string | number,
+}
 
-        <h4 className="text-red-800 font-normal text-4xl mt-5">Desde o último título do</h4>
-        <Image src={flamengoLogo} alt="Flamengo's Logo" className="mt-5 w-80" />
-      </section>
-    )
+export const Timer: React.FC<LastTitleProps> = ({ lastTitle: { timeOfLastTitle: { hour, minutes, seconds } } }: LastTitleProps ) => {
+
+  const [testDate, setTestDate] = useState({} as TestDateProps)
+
+  useEffect(() => {
+    return () => {
+      handleDate()
+    }
+  },)
+  
+  const handleDate = () => {
+    setTestDate({
+      years: 1,
+      mounths: 0,
+      days: 8
+    })
+  }
+
+  return (
+    <section className="flex flex-col gap-1 justify-center items-center p-2">
+      <div className="flex flex-col lg:flex-row gap-5 w-full justify-start">
+        <h1 className="text-white font-semibold text-6xl">
+          { testDate.years }
+          { +testDate.years >= 2 ? " anos" : " ano" }
+        </h1>
+        <h1 className="text-white font-semibold text-6xl">
+          { testDate.mounths }
+          { +testDate.mounths != 1 ? " meses" : " mês" }
+        </h1>
+        <h1 className="text-white font-semibold text-6xl">
+          { testDate.days }
+          { +testDate.days != 1 ? " dias" : " dia" }
+        </h1>
+        <h1 className="text-white font-semibold text-6xl">
+          { hour }
+          { +hour != 1 ? " horas" : " hora" }
+        </h1>
+        <h1 className="text-white font-semibold text-6xl">
+          { minutes }
+          { +hour != 1 ? " minutos" : " minuto" }
+        </h1>
+        <h1 className="text-white font-semibold text-6xl">
+          { seconds }
+          { +hour != 1 ? " segundos" : " segundo" }
+        </h1>
+      </div>
+    </section>
+  )
   
 }
