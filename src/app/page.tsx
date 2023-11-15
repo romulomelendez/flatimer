@@ -15,6 +15,7 @@ const Home: React.FC = () => (
       src={flamengoLogo}
       alt="Flamengo's Logo"
       className="mt-5 w-80"
+      draggable={false}
       priority={true}
     />
   </div>
