@@ -21,8 +21,9 @@ export const Timer: React.FC = () => {
   useEffect(() => {
     return () => {
       const handleTimerUnits = async (): Promise<void> => {
-        const timerUnitsResponse = await (await fetch("http://localhost:3000/lastTitle")).json()
-        setTimerUnitValues(timerUnitsResponse[0])
+        const soccer_team = process.env.NEXT_PUBLIC_SOCCER_TEAM as string
+        const timerUnitsResponse = await (await fetch(process.env.NEXT_PUBLIC_BASE_API_URL + soccer_team)).json()
+        setTimerUnitValues(timerUnitsResponse)
       }
       handleTimerUnits()
     }
