@@ -2,9 +2,9 @@ import { Request, Response, Router } from "express"
 
 export const router = Router()
 
-router.get("/api/timer/:soccerTeam", (req: Request, res: Response) => {
+router.get("/api/timer/:soccerClub", (req: Request, res: Response) => {
 
-    // const { soccerTeam } = req.params
+    // const { soccerClub } = req.params
 
     res.status(200).json(
         {
