@@ -9,3 +9,9 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Club {
+  id  String  @id
+  name String
+  lastTitleDate String
+}
