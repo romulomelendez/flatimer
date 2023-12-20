@@ -19,3 +19,16 @@ router.get("/api/timer/:soccerClub", (req: Request, res: Response) => {
         }
     )
 })
+
+router.post("/api/createClub", async (req: Request, res: Response) => {
+    const prisma = new PrismaClient()
+
+    const club = await prisma.club.create({
+        data: {
+            name: req.body.name,
+            lastTitleDate: req.body.lastTitleDate
+        }
+    })
+
+    res.status(201).json(club)
+})
