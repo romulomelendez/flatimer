@@ -1,6 +1,4 @@
-import { Model } from "sequelize"
-
-export class Club extends Model {
+export class Club {
 
     private name = ""
     private lastTitleDate = ""
