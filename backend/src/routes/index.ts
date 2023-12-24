@@ -3,32 +3,48 @@ import { Request, Response, Router } from "express"
 
 export const router = Router()
 
-router.get("/api/timer/:soccerClub", (req: Request, res: Response) => {
+router.get("/api/timer/:soccerClub", async (req: Request, res: Response) => {
 
-    // const { soccerClub } = req.params
+    const { soccerClub } = req.params
 
-    res.status(200).json(
-        {
-            "dateOfLastTitle": "22031997",
-            "years": 1,
-            "mounths": 0,
-            "days": 20,
-            "hours": 14,
-            "minutes": 5,
-            "seconds": 0
+    const prisma = new PrismaClient()
+    const club = await prisma.club.findUnique({
+        where: {
+            name: soccerClub
         }
-    )
+    })
+
+    if(!club)
+        res.status(404).json("Club Not Found!")
+
+    res.status(200).json(club)
 })
 
 router.post("/api/createClub", async (req: Request, res: Response) => {
+
     const prisma = new PrismaClient()
 
     const club = await prisma.club.create({
         data: {
-            name: req.body.name,
-            lastTitleDate: req.body.lastTitleDate
+            name: req.body.clubName,
+            lastTitleDate: {
+                create: {
+                    name: req.body.lastTitle.name,
+                    dateOfLastTitle: req.body.lastTitle.date,
+                    years: req.body.lastTitle.years,
+                    mounths: req.body.lastTitle.mounths,
+                    days: req.body.lastTitle.days,
+                    hours: req.body.lastTitle.hours,
+                    minutes: req.body.lastTitle.minutes,
+                    seconds: req.body.lastTitle.seconds
+                }
+            } 
         }
     })
 
+    if(!club)
+        return res.status(500).json("Error creating new club")
+    
+    console.log(req.body)
     res.status(201).json(club)
 })

@@ -11,21 +11,22 @@ datasource db {
 }
 
 model Club {
-  id  Int  @id @default(autoincrement())
-  name String
+  id            Int    @id @default(autoincrement())
+  name          String @unique
   lastTitleDate Title?
 }
 
 model Title {
-  id Int @id @default(autoincrement())
+  id              Int    @id @default(autoincrement())
+  name            String
   dateOfLastTitle Int
-  years Int
-  mounths Int
-  days Int
-  hours Int
-  minutes Int
-  seconds Int
+  years           Int
+  mounths         Int
+  days            Int
+  hours           Int
+  minutes         Int
+  seconds         Int
 
-  club Club @relation(fields: [clubId], references: [id])
+  club   Club @relation(fields: [clubId], references: [id])
   clubId Int  @unique
 }
