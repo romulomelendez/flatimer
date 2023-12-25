@@ -3,6 +3,17 @@ import { Request, Response, Router } from "express"
 
 export const router = Router()
 
+router.get("/api/allClubs", async (req: Request, res: Response) => {
+
+    const prisma = new PrismaClient()
+    const clubs = await prisma.club.findMany()
+
+    if(!clubs)
+        res.status(404).json("No one club found")
+    
+    res.status(200).json(clubs)
+})
+
 router.get("/api/timer/:soccerClub", async (req: Request, res: Response) => {
 
     const { soccerClub } = req.params
@@ -23,7 +34,6 @@ router.get("/api/timer/:soccerClub", async (req: Request, res: Response) => {
 router.post("/api/createClub", async (req: Request, res: Response) => {
 
     const prisma = new PrismaClient()
-
     const club = await prisma.club.create({
         data: {
             name: req.body.clubName,
@@ -45,6 +55,5 @@ router.post("/api/createClub", async (req: Request, res: Response) => {
     if(!club)
         return res.status(500).json("Error creating new club")
     
-    console.log(req.body)
     res.status(201).json(club)
 })
