@@ -5,11 +5,11 @@ export const router = Router()
 
 router.get("/api/allClubs", async (_, res: Response) => {
 
-    const prisma = new PrismaClient()
+    const prisma = new PrismaClient()  
     const clubs = await prisma.club.findMany()
 
     if(!clubs)
-        res.status(404).json("No one club found")
+        return res.status(404).json("No one club found")
     
     res.status(200).json(clubs)
 })
