@@ -3,7 +3,7 @@ import { Request, Response, Router } from "express"
 
 export const router = Router()
 
-router.get("/api/allClubs", async (req: Request, res: Response) => {
+router.get("/api/allClubs", async (_, res: Response) => {
 
     const prisma = new PrismaClient()
     const clubs = await prisma.club.findMany()
