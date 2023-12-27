@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import { Prisma, PrismaClient } from "@prisma/client"
 import { Request, Response, Router } from "express"
 
 export const router = Router()
@@ -14,14 +14,14 @@ router.get("/api/allClubs", async (req: Request, res: Response) => {
     res.status(200).json(clubs)
 })
 
-router.get("/api/timer/:soccerClub", async (req: Request, res: Response) => {
+router.get("/api/timer/:clubName", async (req: Request, res: Response) => {
 
-    const { soccerClub } = req.params
+    const { clubName } = req.params
 
     const prisma = new PrismaClient()
     const club = await prisma.club.findUnique({
         where: {
-            name: soccerClub
+            name: clubName
         }
     })
 
@@ -56,4 +56,46 @@ router.post("/api/createClub", async (req: Request, res: Response) => {
         return res.status(500).json("Error creating new club")
     
     res.status(201).json(club)
+})
+
+router.delete("/api/delete/:clubId", async (req: Request, res: Response) => {
+
+    const { clubId } = req.params
+
+    const prisma = new PrismaClient()
+
+    // Verifying that club exists in database
+    const club = await prisma.club.findUnique({
+        where: {
+            id: +clubId
+        }
+    })
+
+    if(!club)
+        return res.status(404).json("Nothing to delete!")
+
+    const deleteTitles = prisma.title.deleteMany({
+        where: {
+            clubId: +clubId
+        }
+    })
+
+    const deleteClub = prisma.club.delete({
+        where: {
+            id: +clubId
+        }
+    })
+
+    try {
+        await prisma.$transaction([deleteTitles, deleteClub])
+    } catch (error) {
+        res.status(500).json({
+            message: "Error deleting Club"
+        })
+    }
+
+    res.status(200).json({
+        message: "Club successfully deleted!",
+        body: club
+    })
 })
