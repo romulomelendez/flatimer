@@ -1,12 +1,12 @@
 import express, { json } from 'express'
 import cors from 'cors'
 
-import { router } from './routes'
+import { clubRoutes } from './routes'
 
 const app = express()
 
 app.use(cors())
 app.use(json())
-app.use(router)
+app.use(clubRoutes)
 
 export { app }

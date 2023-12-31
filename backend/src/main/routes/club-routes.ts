@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express"
 import { PrismaClient } from "@prisma/client"
 
-export const userRoutes = Router()
+export const clubRoutes = Router()
 
-userRoutes.get("/api/club/allClubs", async (_, res: Response) => {
+clubRoutes.get("/api/club/allClubs", async (_, res: Response) => {
 
     const prisma = new PrismaClient()  
     const clubs = await prisma.club.findMany()
@@ -14,7 +14,7 @@ userRoutes.get("/api/club/allClubs", async (_, res: Response) => {
     res.status(200).json(clubs)
 })
 
-userRoutes.get("/api/club/name/:clubName", async (req: Request, res: Response) => {
+clubRoutes.get("/api/club/name/:clubName", async (req: Request, res: Response) => {
 
     const { clubName } = req.params
 
@@ -31,7 +31,7 @@ userRoutes.get("/api/club/name/:clubName", async (req: Request, res: Response) =
     res.status(200).json(club)
 })
 
-userRoutes.get("/api/club/id/:clubId", async (req: Request, res: Response) => {
+clubRoutes.get("/api/club/id/:clubId", async (req: Request, res: Response) => {
 
     const { clubId } = req.params
 
