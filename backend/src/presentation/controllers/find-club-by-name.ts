@@ -1,5 +1,6 @@
 import { FindClubByName } from "../../domain/use-cases"
 import { controller } from "../protocols"
+import { HttpHelper } from "../helpers"
 
 export class FindClubByNameController implements controller {
     constructor(private readonly findClubByName: FindClubByName) {}
@@ -7,11 +8,19 @@ export class FindClubByNameController implements controller {
 
         try {
             const clubName = request.name
+
             if (!clubName) {
-                // return HttpHelper.BAD_REQUEST(new MissingParametersError())
+                // return HttpHelper.BAD_REQUEST()
             }
+
+            const user = await this.findClubByName.perform(clubName)
+
+            if(!user)
+                return HttpHelper.NOT_FOUND()
+
+            return HttpHelper.OK(user)
         } catch (error) {
-            console.log(error)
+            return HttpHelper.INTERNAL_SERVER_ERROR(error as Error)
         }
     }
 }
