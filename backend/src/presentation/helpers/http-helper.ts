@@ -1,4 +1,4 @@
-
+import { InternalServerError } from "../errors"
 import { HttpResponse } from "../protocols"
 
 export class HttpHelper {
@@ -9,7 +9,7 @@ export class HttpHelper {
 
   static INTERNAL_SERVER_ERROR = (err: Error): HttpResponse<Error> => ({
     statusCode: 500,
-    body: err,
+    body: new InternalServerError(err.stack || ""),
   })
 
   static OK = <T>(data: T, message?: string): HttpResponse<T> => ({
