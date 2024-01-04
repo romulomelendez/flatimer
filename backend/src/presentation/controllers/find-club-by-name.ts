@@ -4,7 +4,9 @@ import { HttpHelper } from "../helpers"
 import { MissingParametersError } from "../errors"
 
 export class FindClubByNameController implements controller {
+
     constructor(private readonly findClubByName: FindClubByName) {}
+    
     handle = async (request: FindClubByNameController.Request) => {
 
         try {
