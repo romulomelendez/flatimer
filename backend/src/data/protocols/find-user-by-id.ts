@@ -6,5 +6,5 @@ export interface FindClubByIdRepository {
 
 export namespace FindClubByIdRepository {
   export type Params = { id: number }
-  export type Result = Club
+  export type Result = Club | null
 }
