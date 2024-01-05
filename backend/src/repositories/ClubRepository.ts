@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 
-import { FindClubByNameRepository, FindClubByIdRepository } from "../../data/protocols"
+import { FindClubByNameRepository, FindClubByIdRepository } from "../data/protocols"
 
 export class ClubRepository implements FindClubByNameRepository, FindClubByIdRepository {
 
@@ -14,7 +14,7 @@ export class ClubRepository implements FindClubByNameRepository, FindClubByIdRep
         })
 
         // @ts-ignore
-        return club
+        return club 
     }
 
     findById = async (params: FindClubByIdRepository.Params): Promise<FindClubByIdRepository.Result> => {
