@@ -1,7 +1,7 @@
 import express, { json } from 'express'
 import cors from 'cors'
 
-import { clubRoutes } from './routes'
+import { clubRoutes } from './routes/club-routes'
 
 const app = express()
 

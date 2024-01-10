@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useEffect, useState, Suspense } from "react"
+import { Suspense, useEffect, useState } from "react";
 
-import { TimerUnit } from "./TimerUnit"
+import { TimerUnit } from "./TimerUnit";
 
 type LastTitleProps = {
   dateOfLastTitle?: string,
@@ -16,18 +16,18 @@ type LastTitleProps = {
 
 export const Timer: React.FC = () => {
 
-  const [timerUnitValues, setTimerUnitValues] = useState<LastTitleProps>({} as LastTitleProps)
+  const [timerUnitValues, setTimerUnitValues] = useState<LastTitleProps>({} as LastTitleProps);
 
   useEffect(() => {
     return () => {
       const handleTimerUnits = async (): Promise<void> => {
-        const soccer_team = process.env.NEXT_PUBLIC_SOCCER_TEAM as string
-        const timerUnitsResponse = await (await fetch(process.env.NEXT_PUBLIC_BASE_API_URL + soccer_team)).json()
-        setTimerUnitValues(timerUnitsResponse)
-      }
-      handleTimerUnits()
-    }
-  }, [])
+        const soccer_team = process.env.NEXT_PUBLIC_SOCCER_TEAM as string;
+        const timerUnitsResponse = await (await fetch(process.env.NEXT_PUBLIC_BASE_API_URL + soccer_team)).json();
+        setTimerUnitValues(timerUnitsResponse);
+      };
+      handleTimerUnits();
+    };
+  }, []);
   
   return (
     <section className="flex flex-col gap-1 justify-center items-center p-2">
@@ -42,6 +42,6 @@ export const Timer: React.FC = () => {
         </Suspense>
       </div>
     </section>
-  )
+  );
   
-}
+};
