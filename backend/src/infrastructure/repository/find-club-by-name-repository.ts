@@ -11,6 +11,9 @@ export class FindClubByNameRepository implements FindClubByNameRepositoryInterfa
     const club = await prisma.club.findUnique({
       where: {
         name: clubName
+      },
+      include: {
+        lastTitleDate: true
       }
     })
 
