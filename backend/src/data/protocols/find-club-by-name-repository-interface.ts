@@ -1,8 +1,8 @@
-import { Club } from "../../domain/models/Club"
+import { Club } from "../../domain/models"
 
 export interface FindClubByNameRepositoryInterface {
   execute: (
-    params: FindClubByNameRepositoryInterface.Params
+    params: FindClubByNameRepositoryInterface.Params,
   ) => Promise<FindClubByNameRepositoryInterface.Result>
 }
 
