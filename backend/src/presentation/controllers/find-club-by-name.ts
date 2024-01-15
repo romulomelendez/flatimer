@@ -3,7 +3,7 @@ import { FindClubByNameRepository } from "../../infrastructure/repository"
 
 export class FindClubByNameController implements Controller {
   constructor(
-    private readonly findClubByNameRepository: FindClubByNameRepository,
+    private readonly findClubByNameRepository: FindClubByNameRepository
   ) {}
 
   handle = async (clubName: string) => {
