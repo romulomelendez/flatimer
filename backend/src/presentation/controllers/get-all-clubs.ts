@@ -9,8 +9,9 @@ export class GetAllClubsController implements Controller {
   handle = async () => {
     const allClubs = await this.getAllClubsRepository.execute()
 
-    if (!allClubs) return HttpHelper.NOT_FOUND()
-
+    if (!allClubs)
+      return HttpHelper.NOT_FOUND()
     return HttpHelper.OK(allClubs)
+    
   }
 }
