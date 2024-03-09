@@ -5,9 +5,12 @@ import { CreateClubRepository } from "../../infrastructure/repository"
 export class CreateClubController implements Controller {
   constructor(private readonly createClubRepository: CreateClubRepository) {}
 
+  //@ts-ignore
   handle = async (params: Club) => {
-    const club = await this.createClubRepository.execute(params)
+    const clubCreated = await this.createClubRepository.execute(params)
 
-    return HttpHelper.OK(club)
+    if(!clubCreated)
+      return HttpHelper.NOT_IMPLEMENTED()
+    return HttpHelper.OK(clubCreated)
   }
 }
