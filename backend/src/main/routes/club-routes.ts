@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express"
 
-import { FindClubByNameRepository, GetAllClubsRepository } from "../../infrastructure/repository"
-import { FindClubByNameController, GetAllClubsController } from "../../presentation/controllers"
+import { FindClubByNameRepository, GetAllClubsRepository, CreateClubRepository } from "../../infrastructure/repository"
+import { FindClubByNameController, GetAllClubsController, CreateClubController } from "../../presentation/controllers"
 
 export const clubRoutes = Router()
 
@@ -29,3 +29,13 @@ clubRoutes.get("/api/club/all",
     res.status(statusCode).json(body)
   }
 )
+
+clubRoutes.post("/admin/api/club/create", async ({ body: clubData }: Request, res: Response) => {
+
+  const createClubRepository = new CreateClubRepository()
+  const createClubController = new CreateClubController(createClubRepository)
+
+  const { statusCode, body } = await createClubController.handle(clubData)
+
+  res.status(statusCode).json(body)
+})
