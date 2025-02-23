@@ -5,7 +5,6 @@ import { FindClubByNameController, GetAllClubsController, CreateClubController }
 
 export const clubRoutes = Router()
 
-
 clubRoutes.get("/api/club/name/:clubName",
   async ({ params: { clubName } }: Request, res: Response) => {
   
