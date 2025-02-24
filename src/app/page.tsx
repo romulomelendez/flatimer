@@ -8,9 +8,6 @@ const Home: React.FC = () => (
 
   <div className="bg-slate-900 h-screen w-screen flex flex-col justify-center items-center p-3">
     <Timer />
-    <h4 className="text-red-800 font-normal text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-      Desde o último título do:
-    </h4>
     <Image
       src={flamengoLogo}
       alt="Flamengo's Logo"

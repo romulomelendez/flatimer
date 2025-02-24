@@ -1,13 +1,13 @@
 type UnitProps = {
     unit: {
-        unitTimerValue: string | number,
+        unitTimerValue: number | undefined,
         one: string,
         moreThanOne: string
     }
 }
 
 export const TimerUnit = ({ unit: { unitTimerValue, one, moreThanOne } }: UnitProps) => {
-
+  
   return (
     <>
       {
