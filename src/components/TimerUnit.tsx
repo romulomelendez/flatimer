@@ -9,19 +9,16 @@ type UnitProps = {
 export const TimerUnit = ({ unit: { unitTimerValue, one, moreThanOne } }: UnitProps) => {
   
   return (
-    <>
+    <div className="flex gap-2">
       {
-        unitTimerValue && (
-          <div className="flex flex-col text-white font-semibold text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-            <h1>
-              { unitTimerValue }
-            </h1>
-            <h1>
-              { unitTimerValue != 1 ? " " + moreThanOne : " " + one }
-            </h1>
-          </div>
-        )
+        unitTimerValue !== 0 &&
+          <span className="text-red-600 text-9xl">{ unitTimerValue }</span>
       }
-    </>
+      {
+        unitTimerValue !== 1 ?
+          <span className="text-red-600 text-9xl">{ " " + moreThanOne }</span>
+        : <span className="text-red-600 text-9xl">{ "" + one }</span>
+      }
+    </div>
   )
 }

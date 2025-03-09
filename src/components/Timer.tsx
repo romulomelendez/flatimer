@@ -88,32 +88,47 @@ export const Timer: React.FC = () => {
   }, [currentDate])
 
   return (
-    <section className="flex flex-col gap-1 sm:gap-4 justify-center items-center p-2">
+    <section className="flex flex-col gap-1 p-2">
+      <span className="text-slate-200 text-5xl">
+        Flamengo está há...
+      </span>
       {
         !lastTitleWasToday ? (
-          <div className="grid grid-cols-3 grid-rows-2 gap-9 2xl:flex 2xl:gap-12 w-full">
+          <div className="flex flex-col gap-1">
             <Suspense fallback={<h2>🌀Loading...</h2>}>
-              <TimerUnit
-                unit={{
-                  unitTimerValue: timerUnitValues?.diffYears,
-                  one: "ano",
-                  moreThanOne: "anos",
-                }}
-              />
-              <TimerUnit
-                unit={{
-                  unitTimerValue: timerUnitValues?.diffMonths,
-                  one: "mês",
-                  moreThanOne: "meses",
-                }}
-              />
-              <TimerUnit
-                unit={{
-                  unitTimerValue: timerUnitValues?.diffDays,
-                  one: "dia",
-                  moreThanOne: "dias",
-                }}
-              />
+              {
+                timerUnitValues?.diffYears !== 0 && (
+                  <TimerUnit
+                    unit={{
+                      unitTimerValue: timerUnitValues?.diffYears,
+                      one: "ano",
+                      moreThanOne: "anos"
+                    }}
+                  />
+                )
+              }
+              {
+                timerUnitValues?.diffMonths !== 0 && (
+                  <TimerUnit
+                    unit={{
+                      unitTimerValue: timerUnitValues?.diffMonths,
+                      one: "mês",
+                      moreThanOne: "meses"
+                    }}
+                  />
+                )
+              }
+              {
+                timerUnitValues?.diffDays !== 0 && (
+                  <TimerUnit
+                    unit={{
+                      unitTimerValue: timerUnitValues?.diffDays,
+                      one: "dia",
+                      moreThanOne: "dias"
+                    }}
+                  />
+                )
+              }
             </Suspense>
           </div>
         ) : (
@@ -125,9 +140,9 @@ export const Timer: React.FC = () => {
           </div>
         )
       }
-      <h4 className="text-slate-200 font-normal text-lg sm:text-xl md:text-2xl lg:text-3xl">
-        {/* { timerUnitValues.name } - { timerUnitValues.dateOfLastTitle } */}
-      </h4>
+      <span className="text-slate-200 text-5xl">
+        sem título
+      </span>
     </section>
   )
 }

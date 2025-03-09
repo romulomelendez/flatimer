@@ -6,8 +6,7 @@ import flamengoLogo from "../../public/assets/flamengo-logo.png"
 
 const Home: React.FC = () => (
 
-  <div className="bg-slate-900 h-screen w-screen flex flex-col justify-center items-center p-3">
-    <Timer />
+  <div className="bg-slate-900 h-screen w-screen flex justify-center items-center gap-3">
     <Image
       src={flamengoLogo}
       alt="Flamengo's Logo"
@@ -15,6 +14,7 @@ const Home: React.FC = () => (
       draggable={false}
       priority={true}
     />
+    <Timer />
   </div>
 
 )
