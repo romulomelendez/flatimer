@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react"
 
-import moment from "moment"
+import moment, { Moment } from "moment"
 
 import { TimerUnit } from "./TimerUnit"
 
@@ -30,31 +30,22 @@ export const Timer: React.FC = () => {
 
       const checkIfLastTitleDateWasAtCurrentDate = (lastTitleDateRaw: string): boolean => {
 
-        // Transforming currentDate in a moment object called 'today'
-        const today = moment(currentDate, "DD/MM/YYYY")
-
-        const dateFormat = "DD/MM/YYYY"
-    
         const lastTitleDate = moment(lastTitleDateRaw, dateFormat)
     
         return lastTitleDate.isSame(today, "day")
       }
     
-      const calcDateRange = (lastTitleDateRaw: string): DateRangeProps => {
-        
-        // Transforming currentDate in a moment object called 'today'
-        const today = moment(currentDate, "DD/MM/YYYY")
+      const calcDateRange = (lastTitleDateRaw: string, today: Moment): DateRangeProps => {
 
-        const dateFormat = "DD/MM/YYYY"
-        
-        const lastTitleDate = moment(lastTitleDateRaw, dateFormat)
-    
-        const diffYears = Math.abs(lastTitleDate.diff(today, "years"))
-        const diffMonths = Math.abs(lastTitleDate.diff(today, "months"))
-        const diffDays = Math.abs(lastTitleDate.diff(today, "days"))
+        const initialDate = moment(lastTitleDateRaw, dateFormat)
 
-        console.log(lastTitleDateRaw)
-        console.log("diffYears >>> ", diffYears)
+        let diffYears = today.diff(initialDate, "years")
+        initialDate.add(diffYears, "years")
+
+        let diffMonths = today.diff(initialDate, "months")
+        initialDate.add(diffMonths, "months")
+
+        let diffDays = today.diff(initialDate, "days")
 
         return {
           diffYears,
@@ -63,14 +54,18 @@ export const Timer: React.FC = () => {
         }
       }
 
+      // Transforming currentDate in a moment object called 'today'
+      const dateFormat = "DD/MM/YYYY"
+      const today = moment(currentDate, dateFormat)
+
       const testObj = {
         date: "22-02-2025",
         years: 0,
         months: 0,
-        days: 0,
+        days: 0
       }
 
-      const dateFormated = moment(testObj.date, "DD-MM-YYYY").format("DD/MM/YYYY")
+      const dateFormated = moment(testObj.date, "DD-MM-YYYY").format(dateFormat)
 
       if(checkIfLastTitleDateWasAtCurrentDate(dateFormated)) {
 
@@ -78,7 +73,7 @@ export const Timer: React.FC = () => {
         return
       }
       
-      const untitledPeriod = calcDateRange(dateFormated)
+      const untitledPeriod = calcDateRange(dateFormated, today)
       setTimerUnitValues(untitledPeriod)
 
       return
