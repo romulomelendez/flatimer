@@ -58,14 +58,9 @@ export const Timer: React.FC = () => {
       const dateFormat = "DD/MM/YYYY"
       const today = moment(currentDate, dateFormat)
 
-      const testObj = {
-        date: "22-02-2025",
-        years: 0,
-        months: 0,
-        days: 0
-      }
+      const dateTestObj = "22-02-2025"
 
-      const dateFormated = moment(testObj.date, "DD-MM-YYYY").format(dateFormat)
+      const dateFormated = moment(dateTestObj, "DD-MM-YYYY").format(dateFormat)
 
       if(checkIfLastTitleDateWasAtCurrentDate(dateFormated)) {
 
