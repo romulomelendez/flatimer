@@ -12,7 +12,7 @@ export class CreateClubRepository implements CreateClubRepositoryInterface {
             lastTitle: {
                 name: titleName,
                 season,
-                winningDate
+                date
             }
         } = params
 
@@ -23,7 +23,7 @@ export class CreateClubRepository implements CreateClubRepositoryInterface {
                     create: {
                         name: titleName,
                         season,
-                        winningDate 
+                        date 
                     }
                 }
             }
