@@ -22,6 +22,6 @@ model LastTitle {
   season      String
   date        String
 
-  club   Club @relation(fields: [clubId], references: [id])
-  clubId Int  @unique
+  club        Club @relation(fields: [clubId], references: [id])
+  clubId      Int  @unique
 }

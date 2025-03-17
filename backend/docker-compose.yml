@@ -1,5 +1,5 @@
 services:
-  postgres:
+  db:
     image: postgres
     environment:
       POSTGRES_USER: ${DB_USER}
@@ -11,5 +11,17 @@ services:
       - "5432"
     volumes:
       - clubsAPI:/home/app
+
+  api:
+    build:
+      context: .
+      dockerfile: api.dev.dockerfile
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
 volumes:
   clubsAPI:

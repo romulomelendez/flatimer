@@ -1,18 +1,22 @@
-FROM node:18
+FROM node:22
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN yarn
+RUN npm i -g pnpm
+
+RUN pnpm i
 
 COPY . .
 
-RUN yarn add @prisma/client --save-dev
+RUN pnpm i @prisma/client --save-dev
 
 RUN npx prisma generate
-RUN npx prisma migrate dev
 
 EXPOSE 3000
 
-CMD ["yarn", "dev"]
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
